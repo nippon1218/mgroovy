@@ -1,0 +1,14 @@
+pipeline {
+    agent {
+        label 'slave-Ubuntu'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // 拉取GitHub上的代码
+                git url: 'https://github.com/nippon1218/mgroovy.git', branch: 'main'
+            }
+        }
+    }
+}
