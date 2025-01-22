@@ -10,5 +10,15 @@ pipeline {
                 git url: 'git@github.com:nippon1218/mcmd.git', branch: 'main'
             }
         }
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('test123') {
+            steps {
+                echo 'test1 123'
+            }
+        }
     }
 }
