@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // 拉取GitHub上的代码
-                git url: 'https://github.com/nippon1218/mgroovy.git', branch: 'main'
+                git url: 'git@github.com:nippon1218/mcmd.git', branch: 'main'
             }
         }
     }
