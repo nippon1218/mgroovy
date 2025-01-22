@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Clone mcmd repository') {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'git-credentials',
+                    url: 'git@github.com:nippon1218/mcmd.git'
+            }
+        }
+        
+        stage('Build Go project') {
+            steps {
+                sh '''
+                    go env -w GOPROXY=https://goproxy.cn,direct
+                    go build
+                '''
+            }
+        }
+        
+        stage('Clone mtest repository') {
+            steps {
+                dir('mtest') {
+                    git branch: 'main',
+                        credentialsId: 'git-credentials',
+                        url: 'git@github.com:nippon1218/mtest.git'
+                }
+            }
+        }
+        
+        stage('Run pytest') {
+            steps {
+                dir('mtest') {
+                    sh 'pytest'
+                }
+            }
+        }
+    }
+}
